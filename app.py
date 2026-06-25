@@ -14,13 +14,11 @@ st.write(f"Total resep yang ada di buku: {df.shape[0]} resep")
 st.write("### 📸 Galeri Visual Masakan")
 kolom_gambar = st.columns(3)
 
-# Link gambar estetik untuk tampilan awal web
+# Link gambar estetik disesuaikan dengan menu AYAM asli di database kamu
 link_gambar_awal = {
-    "Nasi Goreng Kampung": "https://images.unsplash.com/photo-1603133872878-684f208fb84b?q=80&w=300&auto=format&fit=crop",
-    "Sate Ayam Madura": "https://images.unsplash.com/photo-1529042410759-befb1204b468?q=80&w=300&auto=format&fit=crop",
-    "Soto Ayam Lamongan": "https://images.unsplash.com/photo-1626804475315-9644b37a2f43?q=80&w=300&auto=format&fit=crop",
-    "Rendang Daging": "https://images.unsplash.com/photo-1610192244261-3f33de3f55e4?q=80&w=300&auto=format&fit=crop",
-    "Es Cendol": "https://images.unsplash.com/photo-1568254183919-78a4f43a2877?q=80&w=300&auto=format&fit=crop"
+    "Sop Ayam Lezat": "https://images.unsplash.com/photo-1547592180-85f173990554?q=80&w=300&auto=format&fit=crop",
+    "Ayam Geprek Pedas": "https://images.unsplash.com/photo-1626132647523-66f5bf380027?q=80&w=300&auto=format&fit=crop",
+    "Ayam Garang Asem": "https://images.unsplash.com/photo-1598515214211-89d3c73ae83b?q=80&w=300&auto=format&fit=crop"
 }
 
 # Loop untuk nampilin gambar masakan di awal sesuai judul resepnya
@@ -37,65 +35,54 @@ st.write("---")
 st.subheader("🤖 Chatbot Asisten Resep")
 st.write("Tanyakan resep makanan yang kamu inginkan di bawah ini!")
 
-# Kamus database bumbu rahasia lengkap dengan ikon masing-masing masakan
+# Kamus bumbu rahasia DIUBAH TOTAL sesuai dengan isi file CSV asli kamu!
 database_rahasia = {
-    "nasi goreng": {
-        "ikon": "🍳",
-        "bumbu": """• 1 piring penuh Nasi putih dingin
-• 3 siung Bawang putih (cincang halus)
-• 4 siung Bawang merah (iris tipis)
-• 3 tangkai Cabai rawit merah (ulek kasar)
-• 2 sendok makan Kecap manis
-• 1 sendok teh Garam & Kaldu bubuk
-• 1 butir Telur ayam
-• 2 potong Ayam suwir (untuk taburan)"""
-    },
-    "sate": {
-        "ikon": "🍢",
-        "bumbu": """• 500 gram Daging ayam filet (potong dadu)
-• 200 gram Kacang tanah (goreng lalu haluskan)
-• 3 siung Bawang putih
-• 5 siung Bawang merah
-• 4 sendok makan Kecap manis
-• 1 potong Gula merah (sisir halus)
-• 1 buah Jeruk limau (peras airnya)
-• 20 batang Tusuk sate"""
-    },
-    "soto": {
+    "sop ayam": {
         "ikon": "🍲",
-        "bumbu": """• 500 gram Daging ayam (potong menjadi 4 bagian)
-• 50 gram Soun (seduh air panas)
-• 50 gram Toge (siangi)
-• 2 tangkai Daun bawang (iris halus)
-• 2 ruas jari Kunyit (haluskan)
-• 2 batang Serai (memarkan)
-• 4 lembar Daun jeruk
-• 5 potong Krupuk udang (dihaluskan untuk bubuk koya)"""
+        "bumbu": """• 500 gram Daging Ayam (potong dadu)
+• 2 buah Wortel (potong bulat)
+• 2 buah Kentang (potong dadu)
+• 3 siung Bawang putih & Bawang merah (tumis)
+• 1 batang Daun bawang & Seledri
+• 1 sendok teh Garam, Merica, dan Pala bubuk"""
     },
-    "rendang": {
-        "ikon": "🥩",
-        "bumbu": """• 1000 gram (1 Kg) Daging sapi (potong menjadi 20-24 bagian)
-• 1000 ml Santan kental (dari 3 butir kelapa tua)
-• 2 batang Serai (memarkan)
-• 1 lembar Daun kunyit (ikat simpul)
-• 2 buah Asam kandis
-• 12 siung Bawang merah (bumbu halus)
-• 8 siung Bawang putih (bumbu halus)
-• 150 gram Cabai merah keriting (bumbu halus)
-• 3 ruas jari Lengkuas (memarkan)"""
+    "geprek": {
+        "ikon": "🌶️",
+        "bumbu": """• 500 gram Ayam goreng tepung (crispy)
+• 10 buah Cabai rawit merah (sesuai selera)
+• 3 siung Bawang putih
+• 1/2 sendok teh Garam & Penyedap rasa
+• 2 sendok makan Minyak goreng panas (untuk menyiram sambal)"""
     },
-    "es cendol": {
-        "ikon": "🍹",
-        "bumbu": """• 200 gram Cendol/Dawet siap pakai
-• 400 ml Santan cair (rebus dengan sedikit garam)
-• 200 gram Gula merah (cairkan dengan 100ml air)
-• 3 potong Es batu besar (serut/hancurkan)
-• 2 lembar Daun pandan (simpulkan)"""
+    "suwir": {
+        "ikon": "🍗",
+        "bumbu": """• 500 gram Dada ayam (rebus lalu suwir-suwir)
+• 5 siung Bawang merah & 3 siung Bawang putih
+• 3 buah Cabai merah keriting
+• 2 lembar Daun jeruk & 1 batang Serai
+• 1 sendok makan Kecap manis & Garam secukupnya"""
+    },
+    "nugget": {
+        "ikon": "🧆",
+        "bumbu": """• 300 gram Daging ayam giling
+• 2 butir Telur ayam
+• 3 sendok makan Tepung tapioka / Terigu
+• 2 siung Bawang putih (haluskan)
+• 100 gram Tepung roti/panir (untuk baluran luar)"""
+    },
+    "asem": {
+        "ikon": "🍲",
+        "bumbu": """• 500 gram Daging ayam (potong kecil)
+• 5 buah Belimbing wuluh (potong bulat)
+• 2 buah Tomat hijau
+• 4 butir Bawang merah & 3 siung Bawang putih (iris)
+• 5 buah Cabai rawit utuh
+• 65 ml Santan kental & Daun pisang (untuk membungkus)"""
     }
 }
 
 if "messages" not in st.session_state:
-    st.session_state.messages = [{"role": "assistant", "content": "Halo! Mau cari resep apa hari ini? Ketik nama makanannya ya (contoh: Nasi Goreng, Sate, Soto, Rendang, Es Cendol)"}]
+    st.session_state.messages = [{"role": "assistant", "content": "Halo! Mau cari resep apa hari ini? Ketik nama makanannya ya (contoh: Sop ayam, Ayam Geprek, Ayam suwir, Nugget, Garang Asem)"}]
 
 for msg in st.session_state.messages:
     if isinstance(msg["content"], dict):
@@ -113,7 +100,6 @@ if user_input := st.chat_input("Ketik pesan kamu di sini..."):
     st.chat_message("user").write(user_input)
     
     Kunci = user_input.lower().strip()
-    # PENCARIAN FLEKSIBEL: mencocokkan kata kunci di dalam kolom 'RecipeName'
     resep_ketemu = df[df['RecipeName'].str.lower().str.contains(Kunci, na=False)]
     
     with st.chat_message("assistant"):
@@ -121,20 +107,18 @@ if user_input := st.chat_input("Ketik pesan kamu di sini..."):
             row_data = resep_ketemu.iloc[0]
             nama = row_data['RecipeName']
             
-            # Pengaman nama kolom
-            kategori = row_data.get('Category', 'Utama' if 'es cendol' not in nama.lower() else 'Minuman')
+            kategori = row_data.get('Category', 'Olahan Ayam Nusantara')
             
             if 'Description' in row_data:
                 deskripsi = row_data['Description']
             elif 'Ingredients' in row_data:
                 deskripsi = str(row_data['Ingredients']).replace('--', ', ')
             else:
-                deskripsi = "Resep lezat hidangan tradisional khas Indonesia."
+                deskripsi = "Resep hidangan ayam lezat tradisional khas Indonesia."
             
-            bahan_bumbu = "Takaran bumbu tambahan belum dimasukkan."
+            bahan_bumbu = "Takaran bumbu tambahan otomatis diambil dari sistem mading."
             ikon_dinamis = "🍽️" 
             
-            # Mencari kecocokan bumbu rahasia
             for makanan, data in database_rahasia.items():
                 if makanan in Kunci or makanan in nama.lower():
                     bahan_bumbu = data["bumbu"]
@@ -160,7 +144,6 @@ if user_input := st.chat_input("Ketik pesan kamu di sini..."):
                 time.sleep(0.5)
                 status.update(label="Pencarian selesai", state="error", expanded=False)
                 
-            respons_gagal = f"Maaf, resep untuk '{user_input}' belum tersedia di database mading kita. Coba ketik resep lain ya!"
+            respons_gagal = f"Maaf, resep untuk '{user_input}' belum tersedia di database mading kita. Coba lihat daftar tabel di atas ya!"
             st.error(respons_gagal)
             st.session_state.messages.append({"role": "assistant", "content": respons_gagal})
-            
