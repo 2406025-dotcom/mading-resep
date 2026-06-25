@@ -112,32 +112,31 @@ if user_input := st.chat_input("Ketik pesan kamu di sini..."):
     st.session_state.messages.append({"role": "user", "content": user_input})
     st.chat_message("user").write(user_input)
     
-    Kunci = user_input.lower()
+    Kunci = user_input.lower().strip()
+    # PENCARIAN FLEKSIBEL: mencocokkan kata kunci di dalam kolom 'RecipeName'
     resep_ketemu = df[df['RecipeName'].str.lower().str.contains(Kunci, na=False)]
     
     with st.chat_message("assistant"):
         if not resep_ketemu.empty:
-            # Ambil data baris pertama yang cocok
             row_data = resep_ketemu.iloc[0]
-            
             nama = row_data['RecipeName']
             
-            # PENGAMAN OTOMATIS: Jika kolom Category/Description tidak ada di CSV, ambil kolom Ingredients
-            kategori = row_data.get('Category', 'Makanan Indonesia')
+            # Pengaman nama kolom
+            kategori = row_data.get('Category', 'Utama' if 'es cendol' not in nama.lower() else 'Minuman')
             
             if 'Description' in row_data:
                 deskripsi = row_data['Description']
             elif 'Ingredients' in row_data:
-                # Merapikan tampilan teks bahan utama jika kolom Description tidak ada
                 deskripsi = str(row_data['Ingredients']).replace('--', ', ')
             else:
-                deskripsi = "Resep lezat tradisional Indonesia."
+                deskripsi = "Resep lezat hidangan tradisional khas Indonesia."
             
             bahan_bumbu = "Takaran bumbu tambahan belum dimasukkan."
-            ikon_dinamis = "🍽️" # Default jika tidak ketemu
+            ikon_dinamis = "🍽️" 
             
+            # Mencari kecocokan bumbu rahasia
             for makanan, data in database_rahasia.items():
-                if makanan in Kunci:
+                if makanan in Kunci or makanan in nama.lower():
                     bahan_bumbu = data["bumbu"]
                     ikon_dinamis = data["ikon"] 
                     break
@@ -146,7 +145,6 @@ if user_input := st.chat_input("Ketik pesan kamu di sini..."):
                 time.sleep(0.8)
                 status.update(label="Takaran bumbu siap!", state="complete", expanded=False)
             
-            # Tampilan output asli buatanmu dengan ikon dinamis
             st.success(f"### {ikon_dinamis} {nama}")
             st.caption(f"📂 Kategori: {kategori}")
             st.write(f"ℹ️ **Deskripsi:** {deskripsi}")
